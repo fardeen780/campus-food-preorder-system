@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Cafeteria | Interactive Prototype</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#" aria-label="Campus Cafeteria home">
+      <span class="brand-icon">🍽</span><span><b>Campus</b><small>CAFETERIA</small></span>
+    </a>
+    <div class="role-label">CURRENT PROFILE</div>
+    <label class="profile-select-wrap">
+      <span class="sr-only">Switch profile</span>
+      <select id="profileSelect" aria-label="Switch profile">
+        <option value="student">🎓 Student</option>
+        <option value="staff">🧑‍🍳 Cafeteria Staff</option>
+        <option value="manager">📊 Cafeteria Manager</option>
+        <option value="admin">⚙️ System Administrator</option>
+      </select>
+    </label>
+    <div class="nav-heading">WORKSPACE <span class="hint">Drag to reorder</span></div>
+    <nav id="mainNav" class="nav-list" aria-label="Main navigation"></nav>
+    <div class="sidebar-bottom">
+      <div class="mini-user"><div class="avatar" id="sideAvatar">JD</div><div><b id="sideName">John Doe</b><small id="sideRole">Student account</small></div></div>
+      <button class="text-button" id="resetDemo">↺ Reset demo data</button>
+      <small class="prototype-note">Local interactive prototype · No backend</small>
+    </div>
+  </aside>
+
+  <main class="main-area">
+    <header class="topbar">
+      <button class="icon-button mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+      <div class="breadcrumb"><span>Campus Cafeteria</span><i>/</i><b id="pageCrumb">Dashboard</b></div>
+      <div class="top-actions">
+        <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Search menu or orders…"></label>
+        <button class="icon-button notification-button" id="notificationButton" title="Notifications">♧<em></em></button>
+        <button class="profile-chip" id="profileMenuButton"><span class="avatar" id="topAvatar">JD</span><span class="profile-chip-text"><b id="topName">John Doe</b><small id="topRole">Student</small></span><span>⌄</span></button>
+      </div>
+      <div class="profile-popover hidden" id="profilePopover">
+        <b id="popoverName">John Doe</b><small id="popoverEmail">john.doe@campus.edu</small>
+        <button data-go="profile">View profile</button>
+        <button id="popoverSwitch">Switch profile</button>
+        <label class="popover-switch-label">Choose workspace<select id="popoverProfileSelect" class="popover-profile-select"><option value="student">🎓 Student</option><option value="staff">🧑‍🍳 Cafeteria Staff</option><option value="manager">📊 Cafeteria Manager</option><option value="admin">⚙️ System Administrator</option></select></label>
+        <button id="logoutButton">Sign out (demo)</button>
+      </div>
+    </header>
+
+    <div class="page-container">
+      <div id="toast" class="toast hidden" role="status"></div>
+      <section class="page active" id="page-dashboard"></section>
+      <section class="page" id="page-menu"></section>
+      <section class="page" id="page-cart"></section>
+      <section class="page" id="page-checkout"></section>
+      <section class="page" id="page-orders"></section>
+      <section class="page" id="page-payments"></section>
+      <section class="page" id="page-staff-orders"></section>
+      <section class="page" id="page-menu-manage"></section>
+      <section class="page" id="page-reports"></section>
+      <section class="page" id="page-users"></section>
+      <section class="page" id="page-profile"></section>
+    </div>
+    <footer class="footer">Campus Cafeteria Prototype <span>Bangladesh · Currency: BDT (৳)</span></footer>
+  </main>
+</div>
+<div class="modal-backdrop hidden" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>
