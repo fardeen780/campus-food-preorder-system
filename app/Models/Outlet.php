@@ -29,4 +29,8 @@ class Outlet extends Model
     {
         return $this->hasMany(FoodItem::class);
     }
+        public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }
