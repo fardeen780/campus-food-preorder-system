@@ -66,6 +66,10 @@ class Order extends Model
     {
         return $this->hasOne(FoodToken::class);
     }
+        public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
 
     protected function dueAmount(): Attribute
     {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class FoodToken extends Model
 {
@@ -20,6 +21,10 @@ class FoodToken extends Model
     public function currentOwner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'current_owner_id');
+    }
+        public function transfers(): HasMany
+    {
+        return $this->hasMany(TokenTransfer::class);
     }
 
     public static function generateCode(int $length = 8): string
