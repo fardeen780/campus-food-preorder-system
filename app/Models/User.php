@@ -56,7 +56,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(FoodToken::class, 'current_owner_id');
     }
-        public function sentTransfers(): HasMany
+    public function sentTransfers(): HasMany
     {
         return $this->hasMany(TokenTransfer::class, 'sender_id');
     }

@@ -6,7 +6,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TokenController;
+use App\Http\Controllers\TransferController;
 use App\Http\Middleware\EnsureRole;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +47,21 @@ Route::middleware(['auth', EnsureRole::class.':student'])
         Route::get('/orders', [OrderController::class, 'index'])->name('orders');
         Route::get('/orders/{id}', [OrderController::class, 'show'])->whereNumber('id')->name('orders.show');
         Route::post('/orders/{id}/cancel', [OrderController::class, 'cancel'])->whereNumber('id')->name('orders.cancel');
+
+        Route::get('/tokens', [TokenController::class, 'index'])->name('tokens');
+        Route::get('/tokens/{id}/transfer', [TokenController::class, 'create'])->whereNumber('id')->name('tokens.transfer');
+        Route::post('/tokens/{id}/transfer', [TokenController::class, 'store'])
+            ->whereNumber('id')->middleware('throttle:10,1')->name('tokens.transfer.send');
+
+        Route::get('/transfers/sent', [TransferController::class, 'sent'])->name('transfers.sent');
+        Route::get('/transfers/received', [TransferController::class, 'received'])->name('transfers.received');
+        Route::post('/transfers/{id}/accept', [TransferController::class, 'accept'])->whereNumber('id')->name('transfers.accept');
+        Route::post('/transfers/{id}/reject', [TransferController::class, 'reject'])->whereNumber('id')->name('transfers.reject');
+        Route::post('/transfers/{id}/cancel', [TransferController::class, 'cancel'])->whereNumber('id')->name('transfers.cancel');
+
+        Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+        Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.read-all');
+        Route::post('/notifications/{id}/open', [NotificationController::class, 'open'])->whereUuid('id')->name('notifications.open');
     });
 
 Route::middleware(['auth', EnsureRole::class.':staff'])

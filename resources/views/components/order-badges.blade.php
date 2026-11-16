@@ -1,4 +1,4 @@
-@props(['order'])
+@props(['order', 'payment' => true])
 @php
     $orderColor = match ($order->order_status->value) {
         'pending' => 'secondary',
@@ -16,4 +16,6 @@
     };
 @endphp
 <span class="badge text-bg-{{ $orderColor }}">{{ $order->order_status->label() }}</span>
-<span class="badge text-bg-{{ $payColor }}">{{ $order->payment_status->label() }}</span>
+@if ($payment)
+    <span class="badge text-bg-{{ $payColor }}">{{ $order->payment_status->label() }}</span>
+@endif

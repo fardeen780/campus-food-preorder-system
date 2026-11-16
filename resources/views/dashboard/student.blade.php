@@ -1,10 +1,28 @@
 @extends('layouts.app')
 @section('title', 'Dashboard')
 @section('content')
+    @php
+        $waitingForMe = auth()->user()->receivedTransfers()
+            ->where('status', 'pending')
+            ->where('expires_at', '>', now())
+            ->count();
+    @endphp
+
     <div class="hero mb-4">
         <h1 class="h3">Hello, {{ auth()->user()->name }}</h1>
         <p class="mb-0">Student ID {{ auth()->user()->student_id }}</p>
     </div>
+
+    @if ($waitingForMe > 0)
+        <div class="alert alert-warning d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <span>
+                <i class="bi bi-inbox"></i>
+                You have {{ $waitingForMe }} food token transfer {{ $waitingForMe === 1 ? 'request' : 'requests' }} waiting for your response.
+            </span>
+            <a class="btn btn-brand btn-sm" href="{{ route('student.transfers.received') }}">View requests</a>
+        </div>
+    @endif
+
     <div class="row g-3">
         <x-stat-card label="Active orders" :value="$activeOrders" icon="bi-bag" />
         <x-stat-card label="Food tokens you hold" :value="$tokensHeld" icon="bi-ticket-perforated" />
