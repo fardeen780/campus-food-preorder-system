@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\AdminActivityController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ManagerCategoryController;
+use App\Http\Controllers\ManagerFoodController;
+use App\Http\Controllers\ManagerOrderController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
@@ -85,9 +90,36 @@ Route::middleware(['auth', EnsureRole::class.':staff'])
 Route::middleware(['auth', EnsureRole::class.':manager'])
     ->prefix('manager')->name('manager.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'manager'])->name('dashboard');
+
+        Route::get('/foods', [ManagerFoodController::class, 'index'])->name('foods');
+        Route::get('/foods/create', [ManagerFoodController::class, 'create'])->name('foods.create');
+        Route::post('/foods', [ManagerFoodController::class, 'store'])->name('foods.store');
+        Route::get('/foods/{id}/edit', [ManagerFoodController::class, 'edit'])->whereNumber('id')->name('foods.edit');
+        Route::put('/foods/{id}', [ManagerFoodController::class, 'update'])->whereNumber('id')->name('foods.update');
+        Route::post('/foods/{id}/toggle', [ManagerFoodController::class, 'toggle'])->whereNumber('id')->name('foods.toggle');
+        Route::delete('/foods/{id}', [ManagerFoodController::class, 'destroy'])->whereNumber('id')->name('foods.destroy');
+        Route::post('/foods/{id}/restore', [ManagerFoodController::class, 'restore'])->whereNumber('id')->name('foods.restore');
+
+        Route::get('/categories', [ManagerCategoryController::class, 'index'])->name('categories');
+        Route::post('/categories', [ManagerCategoryController::class, 'store'])->name('categories.store');
+        Route::put('/categories/{id}', [ManagerCategoryController::class, 'update'])->whereNumber('id')->name('categories.update');
+
+        Route::get('/orders', [ManagerOrderController::class, 'index'])->name('orders');
+        Route::get('/orders/{id}', [ManagerOrderController::class, 'show'])->whereNumber('id')->name('orders.show');
+
+        Route::get('/dues', [ManagerOrderController::class, 'dues'])->name('dues');
+        Route::get('/dues/{id}', [ManagerOrderController::class, 'studentDues'])->whereNumber('id')->name('dues.student');
     });
 
 Route::middleware(['auth', EnsureRole::class.':admin'])
     ->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'admin'])->name('dashboard');
+
+        Route::get('/users', [AdminUserController::class, 'index'])->name('users');
+        Route::get('/users/create', [AdminUserController::class, 'create'])->name('users.create');
+        Route::post('/users', [AdminUserController::class, 'store'])->name('users.store');
+        Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->whereNumber('id')->name('users.edit');
+        Route::put('/users/{id}', [AdminUserController::class, 'update'])->whereNumber('id')->name('users.update');
+
+        Route::get('/activity', [AdminActivityController::class, 'index'])->name('activity');
     });

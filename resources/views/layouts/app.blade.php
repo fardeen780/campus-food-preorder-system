@@ -22,12 +22,14 @@
         'manager' => [
             ['manager.dashboard', 'bi-speedometer2', 'Dashboard'],
             ['manager.foods', 'bi-egg-fried', 'Food Items'],
+            ['manager.categories', 'bi-tags', 'Categories'],
             ['manager.orders', 'bi-bag', 'All Orders'],
             ['manager.dues', 'bi-cash-stack', 'Outstanding Dues'],
         ],
         'admin' => [
             ['admin.dashboard', 'bi-speedometer2', 'Dashboard'],
             ['admin.users', 'bi-people', 'Users'],
+            ['admin.activity', 'bi-shield-check', 'Activity Log'],
         ],
     };
 @endphp
