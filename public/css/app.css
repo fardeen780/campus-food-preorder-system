@@ -43,3 +43,5 @@ h1, h2, h3, h4, .brand-font { font-family: 'Manrope', 'DM Sans', sans-serif; fon
 .btn-brand { background: var(--orange-500); border-color: var(--orange-500); color: #fff; font-weight: 700; }
 .btn-brand:hover { background: var(--orange-600); border-color: var(--orange-600); color: #fff; }
 .auth-card { max-width: 440px; border: 0; border-radius: 1rem; box-shadow: 0 8px 30px rgba(0, 0, 0, .08); }
+.nav-pills .nav-link { color: var(--green-900); }
+.nav-pills .nav-link.active { background: var(--orange-500); color: #fff; }

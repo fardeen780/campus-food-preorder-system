@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StaffOrderController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\TransferController;
 use App\Http\Middleware\EnsureRole;
@@ -67,6 +68,18 @@ Route::middleware(['auth', EnsureRole::class.':student'])
 Route::middleware(['auth', EnsureRole::class.':staff'])
     ->prefix('staff')->name('staff.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'staff'])->name('dashboard');
+
+        Route::get('/orders', [StaffOrderController::class, 'index'])->name('orders');
+        Route::get('/orders/{id}', [StaffOrderController::class, 'show'])->whereNumber('id')->name('orders.show');
+        Route::post('/orders/{id}/advance', [StaffOrderController::class, 'advance'])->whereNumber('id')->name('orders.advance');
+        Route::post('/orders/{id}/collect', [StaffOrderController::class, 'collect'])
+            ->whereNumber('id')->middleware('throttle:30,1')->name('orders.collect');
+        Route::post('/orders/{id}/payment', [StaffOrderController::class, 'pay'])
+            ->whereNumber('id')->middleware('throttle:30,1')->name('orders.pay');
+
+        Route::get('/verify', [StaffOrderController::class, 'verifyForm'])->name('verify');
+        Route::post('/verify', [StaffOrderController::class, 'verify'])
+            ->middleware('throttle:30,1')->name('verify.lookup');
     });
 
 Route::middleware(['auth', EnsureRole::class.':manager'])

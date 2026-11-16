@@ -22,6 +22,10 @@
                         'rejected' => 'bi-x-circle',
                         'cancelled' => 'bi-slash-circle',
                         'expired' => 'bi-hourglass-bottom',
+                        'confirmed' => 'bi-check2',
+                        'preparing' => 'bi-fire',
+                        'ready' => 'bi-bag-check',
+                        'completed' => 'bi-check2-all',
                         default => 'bi-bell',
                     };
                 @endphp
