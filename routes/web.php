@@ -3,8 +3,10 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Middleware\EnsureRole;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +36,14 @@ Route::middleware(['auth', EnsureRole::class.':student'])
         Route::post('/cart', [CartController::class, 'store'])->name('cart.add');
         Route::patch('/cart/{id}', [CartController::class, 'update'])->whereNumber('id')->name('cart.update');
         Route::delete('/cart/{id}', [CartController::class, 'destroy'])->whereNumber('id')->name('cart.remove');
+
+        Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
+        Route::post('/checkout', [CheckoutController::class, 'store'])
+            ->middleware('throttle:10,1')->name('checkout.place');
+
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+        Route::get('/orders/{id}', [OrderController::class, 'show'])->whereNumber('id')->name('orders.show');
+        Route::post('/orders/{id}/cancel', [OrderController::class, 'cancel'])->whereNumber('id')->name('orders.cancel');
     });
 
 Route::middleware(['auth', EnsureRole::class.':staff'])
