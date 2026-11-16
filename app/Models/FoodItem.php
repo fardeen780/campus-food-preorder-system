@@ -44,4 +44,9 @@ class FoodItem extends Model
     {
         $query->where('is_available', true);
     }
+
+    public function isOrderable(): bool
+    {
+        return ! $this->trashed() && $this->is_available && $this->outlet?->is_active;
+    }
 }

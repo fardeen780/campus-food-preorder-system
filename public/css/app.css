@@ -1,0 +1,45 @@
+:root {
+    --green-900: #14532d;
+    --green-700: #166534;
+    --green-100: #dcfce7;
+    --orange-500: #f97316;
+    --orange-600: #ea580c;
+    --cream: #fdf8f0;
+    --ink: #1f2937;
+}
+
+body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--cream); color: var(--ink); }
+h1, h2, h3, h4, .brand-font { font-family: 'Manrope', 'DM Sans', sans-serif; font-weight: 800; }
+
+.app { display: flex; min-height: 100vh; }
+.main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+.sidebar {
+    --bs-offcanvas-width: 270px;
+    --bs-offcanvas-bg: var(--green-900);
+    --bs-offcanvas-color: #ffffff;
+    background-color: var(--green-900) !important;
+    color: #ffffff;
+}
+@media (min-width: 992px) {
+    .sidebar { width: 260px !important; flex: 0 0 260px !important; }
+}
+.sidebar-inner { padding: 1.25rem 1rem; }
+.sidebar-brand { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.25rem; margin-bottom: .25rem; color: #ffffff; }
+.sidebar-role { font-size: .85rem; color: #bbf7d0; margin-bottom: 1.5rem; }
+.sidebar .nav-link { color: #ecfdf5; font-weight: 500; border-radius: .6rem; padding: .65rem .85rem; display: flex; gap: .6rem; align-items: center; }
+.sidebar .nav-link:hover { background: rgba(255, 255, 255, .12); color: #ffffff; }
+.sidebar .nav-link.active { background: var(--orange-500); color: #ffffff; font-weight: 700; }
+
+.topbar { background: #fff; border-bottom: 1px solid #eee; padding: .75rem 1.25rem; display: flex; align-items: center; gap: 1rem; }
+.content { padding: 1.5rem; }
+
+.hero { background: linear-gradient(120deg, var(--green-700), var(--green-900)); color: #fff; border-radius: 1rem; padding: 1.5rem; }
+.stat-card { background: #fff; border-radius: 1rem; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); height: 100%; }
+.stat-card .bi { font-size: 1.5rem; color: var(--orange-500); }
+.stat-value { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.75rem; }
+.stat-label { color: #6b7280; font-size: .9rem; }
+
+.btn-brand { background: var(--orange-500); border-color: var(--orange-500); color: #fff; font-weight: 700; }
+.btn-brand:hover { background: var(--orange-600); border-color: var(--orange-600); color: #fff; }
+.auth-card { max-width: 440px; border: 0; border-radius: 1rem; box-shadow: 0 8px 30px rgba(0, 0, 0, .08); }
