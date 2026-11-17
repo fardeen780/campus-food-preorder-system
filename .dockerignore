@@ -1,0 +1,8 @@
+.git
+.env
+.env.*
+vendor
+node_modules
+design-reference
+tests
+bootstrap/cache/*.php

@@ -11,6 +11,12 @@ class DemoUserSeeder extends Seeder
 {
     public function run(): void
     {
+        $password = (string) config('app.demo_password');
+
+        if (app()->isProduction() && ($password === 'password' || strlen($password) < 10)) {
+            throw new \RuntimeException('Set a strong DEMO_PASSWORD (at least 10 characters) before seeding in production.');
+        }
+
         $outlets = [
             ['JMI', 'Rice, curry and main meals', '🍛'],
             ['Salad Bar', 'Fresh salads and bowls', '🥗'],
@@ -36,7 +42,7 @@ class DemoUserSeeder extends Seeder
         foreach ($accounts as [$name, $email, $role, $studentId, $outletId]) {
             User::firstOrNew(['email' => $email])->forceFill([
                 'name' => $name,
-                'password' => 'password',
+                'password' => $password,
                 'role' => $role,
                 'student_id' => $studentId,
                 'phone' => '01700000000',
