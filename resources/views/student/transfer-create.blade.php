@@ -6,7 +6,7 @@
         <div class="col-12 col-lg-7">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <h3 class="h5">{{ $order->outlet->icon }} {{ $order->outlet->name }} · {{ $order->order_number }}</h3>
+                    <h3 class="h5"><i class="bi bi-shop"></i> {{ $order->outlet->name }} · {{ $order->order_number }}</h3>
                     <p class="mb-1"><strong>Food:</strong> {{ $order->items->map(fn ($i) => $i->quantity.' × '.$i->item_name)->implode(', ') }}</p>
                     <p><strong>Pickup:</strong> {{ $order->pickup_datetime->format('D j M, g:i A') }}</p>
 

@@ -9,7 +9,7 @@
         <div class="col-12 col-lg-7">
             <div class="card border-0 shadow-sm mb-3">
                 <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                    <span class="fw-bold">{{ $order->outlet->icon }} {{ $order->outlet->name }}</span>
+                    <span class="fw-bold"><i class="bi bi-shop"></i> {{ $order->outlet->name }}</span>
                     <span><x-order-badges :order="$order" /></span>
                 </div>
                 <div class="table-responsive">

@@ -36,9 +36,16 @@
                                        class="form-control @error('name') is-invalid @enderror">
                                 @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
-                            <div class="col-md-4">
-                                <label class="form-label" for="icon">Emoji icon</label>
-                                <input id="icon" name="icon" value="{{ old('icon', $item->icon) }}" maxlength="16" class="form-control">
+                                                        <div class="col-md-4">
+                                <div class="form-label">Photo</div>
+                                @if ($item->exists)
+                                    <x-food-thumb :item="$item" :size="64" />
+                                @endif
+                                <div class="form-text">
+                                    Add the photo file to <code>public/images/food/</code>, named
+                                    <code>{{ $item->exists ? \Illuminate\Support\Str::slug($item->name) : 'name-of-the-dish' }}.webp</code>.
+                                    Until then a placeholder is shown.
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label" for="price">Price (৳)</label>

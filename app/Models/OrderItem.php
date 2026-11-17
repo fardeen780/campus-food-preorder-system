@@ -30,7 +30,7 @@ class OrderItem extends Model
 
     public function foodItem(): BelongsTo
     {
-        return $this->belongsTo(FoodItem::class);
+        return $this->belongsTo(FoodItem::class)->withTrashed();
     }
 
     protected function lineTotal(): Attribute

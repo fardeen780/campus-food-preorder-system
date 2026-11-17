@@ -5,11 +5,14 @@
         <div class="col-12 col-lg-7">
             @foreach ($groups as $group)
                 <div class="card border-0 shadow-sm mb-3">
-                    <div class="card-header bg-white fw-bold">{{ $group['outlet']->icon }} {{ $group['outlet']->name }}</div>
+                    <div class="card-header bg-white fw-bold"><i class="bi bi-shop"></i> {{ $group['outlet']->name }}</div>
                     <ul class="list-group list-group-flush">
                         @foreach ($group['items'] as $ci)
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span>{{ $ci->quantity }} × {{ $ci->foodItem->name }}</span>
+                            <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
+                                <span class="item-line">
+                                    <x-food-thumb :item="$ci->foodItem" :size="44" />
+                                    <span>{{ $ci->quantity }} × {{ $ci->foodItem->name }}</span>
+                                </span>
                                 <span>৳{{ number_format((float) $ci->line_total, 2) }}</span>
                             </li>
                         @endforeach

@@ -136,3 +136,9 @@ thead th { font-size: .8rem; color: var(--muted); font-weight: 700; background: 
 .alert-panel { border-left: 5px solid #f59e0b !important; }
 .request-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding: .9rem 0; border-top: 1px solid var(--line); }
 .notice-unread { background: var(--mint-soft); }
+.food-thumb { object-fit: cover; border-radius: .6rem; background: var(--mint-soft); flex: 0 0 auto; display: block; }
+.item-line { display: flex; align-items: center; gap: .75rem; min-width: 0; }
+.thumb-stack { display: flex; align-items: center; }
+.thumb-stack .food-thumb { border: 2px solid #fff; margin-left: -10px; }
+.thumb-stack .food-thumb:first-child { margin-left: 0; }
+.thumb-more { margin-left: .4rem; font-size: .8rem; color: var(--muted); font-weight: 600; }

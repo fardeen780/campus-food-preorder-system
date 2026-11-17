@@ -33,7 +33,12 @@
                 <tbody>
                 @forelse ($items as $item)
                     <tr>
-                        <td>{{ $item->icon }} {{ $item->name }}</td>
+                        <td>
+                            <div class="item-line">
+                                <x-food-thumb :item="$item" :size="48" />
+                                <span class="fw-semibold">{{ $item->name }}</span>
+                            </div>
+                        </td>
                         <td>{{ $item->outlet->name }}</td>
                         <td>{{ $item->category->name }}</td>
                         <td>৳{{ number_format((float) $item->price, 2) }}</td>

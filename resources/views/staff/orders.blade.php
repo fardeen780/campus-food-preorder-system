@@ -33,7 +33,14 @@
                             @endphp
                             <tr>
                                 <td class="fw-bold">{{ $order->order_number }}</td>
-                                <td>{{ $order->items->map(fn ($i) => $i->quantity.' × '.$i->item_name)->implode(', ') }}</td>
+                                <td>
+                                    @foreach ($order->items as $oi)
+                                        <div class="item-line mb-1">
+                                            <x-food-thumb :item="$oi->foodItem" :name="$oi->item_name" :size="36" />
+                                            <span>{{ $oi->quantity }} × {{ $oi->item_name }}</span>
+                                        </div>
+                                    @endforeach
+                                </td>
                                 <td>{{ $order->pickup_datetime->format('D j M, g:i A') }}</td>
                                 <td>{{ $holder?->name }}<div class="small text-muted">ID {{ $holder?->student_id }}</div></td>
                                 <td><x-order-badges :order="$order" /></td>

@@ -5,7 +5,7 @@
         <div class="col-12 col-lg-7">
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                    <span class="fw-bold">{{ $order->outlet->icon }} {{ $order->outlet->name }}</span>
+                    <span class="fw-bold"><i class="bi bi-shop"></i> {{ $order->outlet->name }}</span>
                     <span><x-order-badges :order="$order" /></span>
                 </div>
                 <div class="table-responsive">
@@ -14,7 +14,12 @@
                         <tbody>
                         @foreach ($order->items as $item)
                             <tr>
-                                <td>{{ $item->item_name }}</td>
+                                <td>
+                                    <div class="item-line">
+                                        <x-food-thumb :item="$item->foodItem" :name="$item->item_name" :size="56" />
+                                        <span class="fw-semibold">{{ $item->item_name }}</span>
+                                    </div>
+                                </td>
                                 <td>৳{{ number_format((float) $item->unit_price, 2) }}</td>
                                 <td>{{ $item->quantity }}</td>
                                 <td class="text-end">৳{{ number_format((float) $item->line_total, 2) }}</td>
