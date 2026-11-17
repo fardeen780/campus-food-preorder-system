@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class FoodItem extends Model
 {
@@ -48,5 +50,30 @@ class FoodItem extends Model
     public function isOrderable(): bool
     {
         return ! $this->trashed() && $this->is_available && $this->outlet?->is_active;
+    }
+
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::get(function () {
+            $candidates = [];
+
+            if ($this->image_path && ! str_contains($this->image_path, '..')) {
+                $candidates[] = ltrim($this->image_path, '/');
+            }
+
+            $slug = Str::slug($this->name);
+
+            foreach (['webp', 'jpg', 'jpeg', 'png'] as $extension) {
+                $candidates[] = 'images/food/'.$slug.'.'.$extension;
+            }
+
+            foreach ($candidates as $path) {
+                if (is_file(public_path($path))) {
+                    return asset($path);
+                }
+            }
+
+            return asset('images/food-fallback.svg');
+        });
     }
 }

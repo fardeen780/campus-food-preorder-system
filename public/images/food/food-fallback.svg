@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Food photo not available">
+  <rect width="800" height="600" fill="#f0fdf4"/>
+  <circle cx="400" cy="270" r="120" fill="#dcfce7" stroke="#86efac" stroke-width="8"/>
+  <circle cx="400" cy="270" r="78" fill="#f0fdf4" stroke="#86efac" stroke-width="6"/>
+  <path d="M250 190v180M232 190v60a18 18 0 0 0 36 0v-60" stroke="#15803d" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M550 190c-26 30-26 90 0 100v80" stroke="#15803d" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <text x="400" y="480" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#166534">Photo coming soon</text>
+</svg>
