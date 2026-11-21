@@ -1,58 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Requests;
 
-use App\Http\Controllers\Controller;
-use App\Models\ActivityLog;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
-use Illuminate\View\View;
+use Illuminate\Validation\Rules\Password;
 
-class LoginController extends Controller
+class RegisterRequest extends FormRequest
 {
-    public function create(): View
+    public function authorize(): bool
     {
-        return view('auth.login');
+        return true;
     }
 
-    public function store(Request $request): RedirectResponse
+    protected function prepareForValidation(): void
     {
-        $data = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
+        $this->merge([
+            'email' => Str::lower(trim((string) $this->input('email'))),
+            'student_id' => trim((string) $this->input('student_id')),
+            'name' => trim((string) $this->input('name')),
         ]);
-
-        $email = Str::lower($data['email']);
-
-        $ok = Auth::attempt(
-            ['email' => $email, 'password' => $data['password'], 'is_active' => true],
-            $request->boolean('remember')
-        );
-
-        if ($ok) {
-            $request->session()->regenerate();
-            ActivityLog::record('login', $request->user());
-
-            return redirect()->route('dashboard');
-        }
-
-        ActivityLog::record('login_failed', null, null, null, ['email' => $email]);
-
-        return back()
-            ->withErrors(['email' => 'These credentials do not match our records, or the account is deactivated.'])
-            ->onlyInput('email');
     }
 
-    public function destroy(Request $request): RedirectResponse
+    public function rules(): array
     {
-        ActivityLog::record('logout', $request->user());
+        return [
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+            'student_id' => ['required', 'regex:/^\d{7}$/', 'unique:users,student_id'],
+            'phone' => ['nullable', 'regex:/^01\d{9}$/'],
+            'password' => ['required', 'confirmed', Password::min(8)],
+        ];
+    }
 
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect()->route('login');
+    public function messages(): array
+    {
+        return [
+            'student_id.regex' => 'Student ID must be exactly 7 digits.',
+            'student_id.unique' => 'This student ID is already registered.',
+            'phone.regex' => 'Enter an 11-digit mobile number starting with 01.',
+        ];
     }
 }
