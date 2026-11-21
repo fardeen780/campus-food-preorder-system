@@ -250,6 +250,16 @@ design-reference/
 
 This can be useful for understanding the intended UX and interface structure during implementation and review.
 
+## Project documentation
+
+The project documentation is available in [`resources/documentation/`](resources/documentation):
+
+- [Software Requirements Specification](resources/documentation/Campus_Food_Pre_Order_System_SRS.pdf)
+- [Technical Report](resources/documentation/Campus_Food_Preorder_System_Technical_Report.pdf)
+- [System Design Specification](resources/documentation/SDS.pdf)
+- [Integration and System Test Report](resources/documentation/Campus_Food_Pre-Order_System_Integration_and_System_Test_Report_.docx)
+- [MVC Architectural Pattern](resources/documentation/MVC_Architectural_Pattern.doc)
+
 ## Future improvements
 
 The current project is a strong working prototype, but there are several natural next steps:
